@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@600&family=Nunito+Sans:wght@400;700;1000&family=Raleway:wght@300&family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.cdnfonts.com/css/averta-standard');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@600&family=Nunito+Sans:wght@900&display=swap');
+
+.ql-picker.ql-font {
+  .ql-picker-item {
+    font-size: 0;
+    &:before {
+      content: attr(data-value) !important;
+      font-size: 14px;
+    }
+  }
+}
+
+.ql-picker.ql-font {
+  .ql-active {
+    &:before {
+      content: attr(data-value) !important;
+      font-size: 14px;
+    }
+  }
+}
+
+.ql-picker.ql-font .ql-picker-label[data-value='Averta']::before,
+.ql-picker.ql-font .ql-picker-item[data-value='Averta']::before {
+  font-family: 'Averta';
+  /* content: 'Averta' !important; */
+}
+
+
+/* .optionSectionNews:hover{
+  background-color: black;
+
+} */
+
+/* .CustomStyle:hover{ 
+  background-color: #749BC2;
+  color: white;
+  text-shadow: 0.5px 0.5px grey;
+} */
