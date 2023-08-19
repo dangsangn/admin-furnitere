@@ -213,6 +213,6 @@ const ProductNewForm = () => {
       </Stack>
     </FormProvider>
   );
-};;
+};
 
 export default ProductNewForm;
