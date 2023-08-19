@@ -29,7 +29,7 @@ export const PATH_PAGE = {
 };
 
 export const PATH_DASHBOARD = {
-  root: '/',
+  root: '/dashboard',
   general: {
     app: path(ROOT_DASHBOARD, '/app'),
   },
@@ -68,6 +68,13 @@ export const PATH_DASHBOARD = {
     detail: path(ROOT_DASHBOARD, '/product/detail/:id'),
     edit: path(ROOT_DASHBOARD, '/product/edit/:id'),
   },
+  user: {
+    root: path(ROOT_DASHBOARD, '/user'),
+    list: path(ROOT_DASHBOARD, '/user/list'),
+    new: path(ROOT_DASHBOARD, '/user/new'),
+    detail: path(ROOT_DASHBOARD, '/user/detail/:id'),
+    edit: path(ROOT_DASHBOARD, '/user/edit/:id'),
+  },
   product_attribute: {
     root: path(ROOT_DASHBOARD, '/product-attribute'),
     list: path(ROOT_DASHBOARD, '/product-attribute/list'),
@@ -101,7 +108,7 @@ export const PATH_DASHBOARD = {
   },
   order_management: {
     root: path(ROOT_DASHBOARD, '/order_management'),
-    list_physical: path(ROOT_DASHBOARD, '/order_management/list-physical'),
+    list: path(ROOT_DASHBOARD, '/order_management/list'),
     detail: path(ROOT_DASHBOARD, '/order_management/detail/:id'),
     detailProd: path(
       ROOT_DASHBOARD,

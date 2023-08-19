@@ -15,6 +15,7 @@ export type NavListProps = {
   action?: string;
   resource?: string;
   actionAbility?: string;
+  roleId: number;
 };
 
 export type NavItemProps = {

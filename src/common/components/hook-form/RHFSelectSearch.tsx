@@ -11,7 +11,7 @@ type IProps = {
   options: Array<any>;
   labelProp: string;
   valueProp?: string;
-  disableSelect?:boolean;
+  disableSelect?: boolean;
   multiple?: boolean;
   disableOptionProps?: string;
 };

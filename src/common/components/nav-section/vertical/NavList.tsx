@@ -6,6 +6,9 @@ import { List, Collapse, Link } from '@mui/material';
 import { NavListProps } from '../type';
 import NavItem from './NavItem';
 import { getActive, isExternalLink } from '..';
+import { useSelector } from 'react-redux';
+import { roleIdSelector } from '../../../../auth/login/login.slice';
+import { useSnackbar } from 'notistack';
 
 // ----------------------------------------------------------------------
 
@@ -14,6 +17,7 @@ type NavListRootProps = {
   depth: number;
   hasChildren: boolean;
   isCollapse?: boolean;
+  canClick: boolean;
 };
 
 export default function NavList({
@@ -21,8 +25,10 @@ export default function NavList({
   depth,
   hasChildren,
   isCollapse = false,
+  canClick,
 }: NavListRootProps) {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const { pathname } = useLocation();
 
@@ -31,6 +37,13 @@ export default function NavList({
   const [open, setOpen] = useState(active);
 
   const handleClickItem = () => {
+    if (!canClick) {
+      enqueueSnackbar('Bạn không quyền vào chức năng này', {
+        variant: 'success',
+        autoHideDuration: 1000,
+      });
+      return;
+    }
     if (!hasChildren) {
       navigate(data.path);
     }
@@ -79,6 +92,7 @@ type NavListSubProps = {
 };
 
 function NavSubList({ data, depth }: NavListSubProps) {
+  const roleId = useSelector(roleIdSelector);
   return (
     <>
       {data.map((list) => (
@@ -87,6 +101,7 @@ function NavSubList({ data, depth }: NavListSubProps) {
           data={list}
           depth={depth + 1}
           hasChildren={!!list.children}
+          canClick={roleId === 1 || list.roleId === roleId}
         />
       ))}
     </>

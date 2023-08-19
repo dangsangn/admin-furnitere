@@ -5,7 +5,7 @@ import NewTagHeader from './components/NewCategoryHeader';
 import NewTagForm from './components/NewTagForm';
 import { useTranslation } from 'react-i18next';
 
-export default function index() {
+export default function NewTag() {
   const { themeStretch } = useSettings();
   const { t } = useTranslation();
 

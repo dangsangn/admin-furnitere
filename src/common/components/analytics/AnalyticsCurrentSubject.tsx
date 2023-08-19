@@ -70,7 +70,12 @@ export default function AnalyticsCurrentSubject({
       <CardHeader title={title} subheader={subheader} />
 
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="radar" series={chartData} options={chartOptions} height={340} />
+        <ReactApexChart
+          type="radar"
+          series={chartData}
+          options={chartOptions}
+          height={340}
+        />
       </ChartWrapperStyle>
     </Card>
   );

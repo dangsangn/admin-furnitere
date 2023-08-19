@@ -1,15 +1,20 @@
+import { Box, MenuItem, TableCell, TableRow } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import React, { useState } from 'react';
-import { IPropTableRow } from '../interface';
-import { Checkbox, TableRow, TableCell, Box, MenuItem } from '@mui/material';
-import { TableMoreMenu } from '../../../common/components/table';
+import { useQueryClient } from 'react-query';
 import Iconify from '../../../common/components/Iconify';
+import { TableMoreMenu } from '../../../common/components/table';
+import { QUERY_KEYS } from '../../../common/constants/queryKeys.constant';
 import vn from '../../../common/locales/vn';
+import { useDeleteProduct } from '../hooks/useDeletProduct';
+import { IPropTableRow } from '../interface';
+import { useNavigate } from 'react-router-dom';
 
 const ProductTableRow = ({
   row,
-}: // selected,
+}: // onDeleteRow,
+// selected,
 // onSelectRow,
-// onDeleteRow,
 // onEditRow,
 // onDetailRow,
 IPropTableRow) => {
@@ -26,6 +31,10 @@ IPropTableRow) => {
   } = row;
 
   const [openMenu, setOpenMenuActions] = useState<HTMLElement | null>(null);
+  const { mutate: deleteProduct } = useDeleteProduct();
+  const { enqueueSnackbar } = useSnackbar();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const handleOpenMenu = (category: React.MouseEvent<HTMLElement>) => {
     setOpenMenuActions(category.currentTarget);
@@ -33,6 +42,22 @@ IPropTableRow) => {
 
   const handleCloseMenu = () => {
     setOpenMenuActions(null);
+  };
+
+  const onDeleteRow = () => {
+    deleteProduct(row.id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEYS.LIST_PRODUCT]);
+        enqueueSnackbar('Xoa san pham thanh cong', {
+          variant: 'success',
+          autoHideDuration: 1000,
+        });
+      },
+    });
+  };
+
+  const onEditRow = () => {
+    navigate('/dashboard/product/new?id=' + row.id);
   };
 
   return (
@@ -82,7 +107,7 @@ IPropTableRow) => {
             <>
               <MenuItem
                 onClick={() => {
-                  // onDeleteRow();
+                  onDeleteRow();
                   handleCloseMenu();
                 }}
                 sx={{ color: 'error.main' }}
@@ -92,7 +117,7 @@ IPropTableRow) => {
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  // onEditRow();
+                  onEditRow();
                   handleCloseMenu();
                 }}
               >

@@ -21,7 +21,7 @@ type IProps = {
   options: Array<any>;
   labelProp: string;
   disabledSelect?: boolean;
-  listBoxScroll: any; 
+  listBoxScroll: any;
   loadingScroll?: boolean;
 };
 

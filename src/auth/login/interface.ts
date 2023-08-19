@@ -34,6 +34,7 @@ export interface IResLogin {
     phone: string;
     address: string;
     role_id: number;
+    roleId: number;
   };
 }
 

@@ -12,6 +12,7 @@ export type MenuItemProps = {
     items: {
       title: string;
       path: string;
+      roleId: number;
     }[];
   }[];
 };

@@ -80,7 +80,9 @@ export default function NavbarVertical({ isOpenSidebar, onCloseSidebar }: Props)
         }}
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Logo sx={{ display: "flex", alignItems: 'center', justifyContent: 'center'}}/>
+          <Logo
+            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          />
 
           {isDesktop && !isCollapse && (
             <CollapseButton

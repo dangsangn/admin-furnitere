@@ -7,3 +7,7 @@ export const getProduct = async (params: IProductParams) => {
     params: params,
   });
 };
+
+export const deleteProduct = async (id: string | number) => {
+  return axiosInstance.delete<unknown, IProductResponse>(`${API_GET_PRODUCT}/${id}`);
+};

@@ -79,7 +79,6 @@ const ProductTable = () => {
               <ProductTableRow
                 key={row.id}
                 row={row}
-                // row={row}
                 // selected={selectedIds.includes(row.id)}
                 // onSelectRow={(e) => handleSelectItem(row.id, e)}
                 // onDeleteRow={() => {

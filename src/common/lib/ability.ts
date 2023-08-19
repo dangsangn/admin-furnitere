@@ -16,7 +16,6 @@ import {
   IUserLogin,
 } from '../../auth/login/interface';
 import { useDispatch } from 'react-redux';
-import { setRules } from '../../auth/login/login.slice';
 
 interface Todo {
   type: 'Todo';
@@ -32,7 +31,7 @@ type Subjects = DEFAULT_SUBJECT;
 export type AppAbility = MongoAbility<[Actions, Subjects]>;
 export const AppAbility = Ability as AbilityClass<AnyMongoAbility>;
 
-export default function defineRulesFor(userPolicies: IGroupPolicies[]) {
+export default function DefineRulesFor(userPolicies: IGroupPolicies[]) {
   const { can, rules, cannot } = new AbilityBuilder(createMongoAbility);
   const dispatch = useDispatch();
   const tempArray: IRules[] = [];
@@ -57,12 +56,11 @@ export default function defineRulesFor(userPolicies: IGroupPolicies[]) {
     });
   }
 
-  dispatch(setRules(tempArray));
   return rules;
 }
 
 export function buildAbilityFor(userPolicies: IGroupPolicies[]): AnyMongoAbility {
-  return new AppAbility(defineRulesFor(userPolicies), {
+  return new AppAbility(DefineRulesFor(userPolicies), {
     detectSubjectType: (object) => object!.type,
   });
 }

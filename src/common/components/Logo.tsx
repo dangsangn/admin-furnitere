@@ -110,7 +110,7 @@ export default function Logo({ disabledLink = false, sx }: Props) {
           fill="#E82629"
         />
       </svg> */}
-      <Typography variant='h6'>LOGO</Typography>
+      <Typography variant="h6">LOGO</Typography>
     </Box>
   );
 

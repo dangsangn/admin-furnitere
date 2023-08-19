@@ -1,9 +1,9 @@
-import {MenuItem, TableCell, TableRow} from '@mui/material';
-import {TableMoreMenu} from '../../../common/components/table';
+import { MenuItem, TableCell, TableRow } from '@mui/material';
+import { TableMoreMenu } from '../../../common/components/table';
 import Iconify from '../../../common/components/Iconify';
 import vn from '../../../common/locales/vn';
-import {IPropsTableRow} from 'src/category/common/interface';
-import React, {useState} from 'react';
+import { IPropsTableRow } from 'src/category/common/interface';
+import React, { useState } from 'react';
 
 const CategoryTableRow = (props: IPropsTableRow) => {
   const { id, name, description } = props.row;

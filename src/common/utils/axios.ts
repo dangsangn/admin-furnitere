@@ -12,7 +12,7 @@ import { PATH_AUTH } from '../routes/paths';
 
 const axiosInstance = axios.create({
   baseURL: HOST_API,
-  paramsSerializer:(param) => toQueryString(param),
+  paramsSerializer: (param) => toQueryString(param),
 });
 const axiosInstance2 = axios.create({
   baseURL: HOST_API,
@@ -21,29 +21,30 @@ axiosInstance.interceptors.response.use(
   (response) => response.data,
   (error) => {
     const { response } = error;
-    const refreshToken = store.getState()?.authLogin.refreshToken;
-    if (response?.status === 401  ) {
-      axiosInstance2.post<any, { accessToken: string }>('/merchant/auth/refresh-token', {
-        refreshToken: refreshToken
-      })
-        .then((res:any) => {
-          store.dispatch(setAccessToken('Bearer ' + res?.data?.accessToken));
-        }) 
-        .catch((e)=>{
-          store.dispatch(setIsExpired(true));
-          window.location.href = PATH_AUTH.login;
-        })
+    // const refreshToken = store.getState()?.authLogin.refreshToken;
+    if (response?.status === 401) {
+      // axiosInstance2.post<any, { accessToken: string }>('/merchant/auth/refresh-token', {
+      //   refreshToken: refreshToken
+      // })
+      //   .then((res:any) => {
+      //     store.dispatch(setAccessToken('Bearer ' + res?.data?.accessToken));
+      //   })
+      //   .catch((e)=>{
+      //     store.dispatch(setIsExpired(true));
+      //     window.location.href = PATH_AUTH.login;
+      //   })
     }
     return Promise.reject(error);
   }
 );
+
 axiosInstance.interceptors.request.use(async (config) => {
   const token = store.getState()?.authLogin.accessToken;
   if (token) {
     try {
       config.headers = {
         ...config.headers,
-        Authorization: token,
+        authorization: 'beare ' + token,
       };
     } catch (e) {
       console.log(e);

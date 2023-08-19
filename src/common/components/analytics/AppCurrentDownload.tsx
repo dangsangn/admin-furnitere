@@ -92,7 +92,12 @@ export default function AppCurrentDownload({
       <CardHeader title={title} subheader={subheader} />
 
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="donut" series={chartSeries} options={chartOptions} height={280} />
+        <ReactApexChart
+          type="donut"
+          series={chartSeries}
+          options={chartOptions}
+          height={280}
+        />
       </ChartWrapperStyle>
     </Card>
   );

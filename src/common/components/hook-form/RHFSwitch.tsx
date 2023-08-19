@@ -21,7 +21,9 @@ export default function RHFSwitch({ name, disableSwitch, ...other }: Props) {
         <Controller
           name={name}
           control={control}
-          render={({ field }) => <Switch {...field} checked={field.value} disabled={ disableSwitch}/>}
+          render={({ field }) => (
+            <Switch {...field} checked={field.value} disabled={disableSwitch} />
+          )}
         />
       }
       {...other}

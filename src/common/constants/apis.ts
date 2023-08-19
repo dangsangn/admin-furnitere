@@ -19,7 +19,7 @@ export const API_AGENT = '/merchant/agent';
 export const API_CASL = '/merchant/casl/group-policy';
 export const API_GROUP_POLICY = '/merchant/casl/group-policy';
 // Merchant-password
-export const API_MERCHANT_POLICIES = '/merchant/auth/current';
+export const API_MERCHANT_POLICIES = '/user/get-profile';
 // User-policies
 export const API_POLICIES = '/merchant/casl/policies';
 
@@ -34,3 +34,9 @@ export const API_GAME_CHART = 'merchant/statistic-game';
 export const API_GET_PRODUCT = '/products';
 export const API_CATEGORY = '/category';
 export const API_SUPPLIER = '/supplier';
+
+//Order
+export const API_GET_ORDER = '/order/by-status';
+
+//User
+export const API_USER = '/user';

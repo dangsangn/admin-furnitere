@@ -8,7 +8,7 @@ import { presignUrl } from '../../lib/files.lib';
 
 // ----------------------------------------------------------------------
 
-const FONT_FAMILY = ['Arial', 'Averta' , 'Tahoma', 'Georgia', 'Impact', 'Verdana'];
+const FONT_FAMILY = ['Arial', 'Averta', 'Tahoma', 'Georgia', 'Impact', 'Verdana'];
 
 const FONT_SIZE = [
   '8px',
@@ -45,7 +45,6 @@ export function redoChange() {
 }
 
 export function imageHandler() {
-
   async function handleUpload(file?: File) {
     let thumbnailRes;
     if (file) {
@@ -91,11 +90,7 @@ export function imageHandler() {
 
     // Insert uploaded image
     // @ts-ignore
-    this.quill.insertEmbed(
-      range.index,
-      'image',
-      res?.url
-    );
+    this.quill.insertEmbed(range.index, 'image', res?.url);
   };
 }
 

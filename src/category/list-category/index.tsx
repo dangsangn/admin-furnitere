@@ -1,7 +1,7 @@
 import React from 'react';
 import useSettings from 'src/common/hooks/useSettings';
 import Page from 'src/common/components/Page';
-import {Container} from '@mui/material';
+import { Container } from '@mui/material';
 import CategoryHeader from 'src/category/list-category/components/CategoryHeader';
 import vn from 'src/common/locales/vn';
 import CategoryTable from 'src/category/list-category/components/CategoryTable';

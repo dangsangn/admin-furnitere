@@ -44,7 +44,7 @@ export const ConfirmModal = (props: ConfirmModalProps) => {
         PaperProps={{
           sx: {
             boxShadow: 0,
-          }
+          },
         }}
       >
         <DialogTitle id="alert-dialog-title">{text}</DialogTitle>

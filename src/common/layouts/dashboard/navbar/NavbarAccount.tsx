@@ -1,13 +1,15 @@
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
-import { styled } from '@mui/material/styles';
 import { Box, Link, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
-import MyAvatar from '../../../components/MyAvatar';
 import { useSelector } from 'react-redux';
-import { merchantInfoSelector } from 'src/profile/common/reducers/merchant-profile.slice';
+import { profileSelector } from '../../../../auth/login/login.slice';
+import MyAvatar from '../../../components/MyAvatar';
+import { useGetProfile } from '../../../../auth/login/hook/useGetprofile';
+import { loginSelector } from '../../../../auth/login/auth.slice';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +31,9 @@ type Props = {
 };
 
 export default function NavbarAccount({ isCollapse }: Props) {
-  const user = useSelector(merchantInfoSelector);
+  const profile = useSelector(profileSelector);
+  const isLogin = useSelector(loginSelector);
+  useGetProfile(isLogin);
 
   return (
     <Link
@@ -65,10 +69,10 @@ export default function NavbarAccount({ isCollapse }: Props) {
           }}
         >
           <Typography variant="subtitle2" noWrap>
-            {user?.name}
+            {profile?.name}
           </Typography>
           <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
-            {user?.email}
+            {profile?.email}
           </Typography>
         </Box>
       </RootStyle>

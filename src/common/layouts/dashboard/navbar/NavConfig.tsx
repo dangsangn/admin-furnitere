@@ -1,5 +1,5 @@
 // routes
-import {PATH_DASHBOARD} from '../../../routes/paths';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
 import Iconify from 'src/common/components/Iconify';
 import SvgIconStyle from '../../../components/SvgIconStyle';
@@ -67,10 +67,10 @@ const navConfig = [
   //   subheader: 'Analytics',
   //   items: [],
   // },
-  {
-    subheader: 'Thống kê',
-    items: [],
-  },
+  // {
+  //   subheader: 'Thống kê',
+  //   items: [],
+  // },
   {
     subheader: 'app',
     items: [
@@ -78,35 +78,20 @@ const navConfig = [
         // action: Action.READ,
         // resource: Resource.TAG,
         // actionAbility: ActionAbility.CAN,
-        title: 'Tag',
-        path: PATH_DASHBOARD.tag.root,
-        icon: ICONS.tag,
-        children: [
-          {
-            title: 'Danh sách Tag',
-            path: PATH_DASHBOARD.tag.list,
-          },
-          {
-            title: 'Thêm mới Tag',
-            path: PATH_DASHBOARD.tag.new,
-          },
-        ],
-      },
-      {
-        // action: Action.READ,
-        // resource: Resource.TAG,
-        // actionAbility: ActionAbility.CAN,
         title: 'Category',
+        roleId: 2,
         path: PATH_DASHBOARD.category.root,
         icon: ICONS.menuItem,
         children: [
           {
             title: 'Danh sách danh mục',
             path: PATH_DASHBOARD.category.list,
+            roleId: 2,
           },
           {
             title: 'Thêm mới danh mục',
             path: PATH_DASHBOARD.category.new,
+            roleId: 2,
           },
         ],
       },
@@ -115,16 +100,56 @@ const navConfig = [
         // resource: Resource.TAG,
         // actionAbility: ActionAbility.CAN,
         title: 'Sản phẩm',
+        roleId: 2,
         path: PATH_DASHBOARD.tag.root,
         icon: ICONS.product,
         children: [
           {
             title: 'Danh sách sản phẩm',
             path: PATH_DASHBOARD.product.list,
+            roleId: 2,
           },
           {
             title: 'Thêm mới sản phẩm',
             path: PATH_DASHBOARD.product.new,
+            roleId: 2,
+          },
+        ],
+      },
+      {
+        // action: Action.READ,
+        // resource: Resource.TAG,
+        // actionAbility: ActionAbility.CAN,
+        title: 'Đơn hàng',
+        roleId: 2,
+        path: PATH_DASHBOARD.order_management.root,
+        icon: ICONS.order,
+        children: [
+          {
+            title: 'Danh sách đơn hàng',
+            path: PATH_DASHBOARD.order_management.list,
+            roleId: 2,
+          },
+        ],
+      },
+      {
+        // action: Action.READ,
+        // resource: Resource.TAG,
+        // actionAbility: ActionAbility.CAN,
+        title: 'Nhân viên',
+        path: PATH_DASHBOARD.user.root,
+        icon: ICONS.userManage,
+        roleId: 1,
+        children: [
+          {
+            title: 'Danh sách Nhân viên',
+            path: PATH_DASHBOARD.user.list,
+            roleId: 1,
+          },
+          {
+            title: 'Thêm mới Nhân viên',
+            path: PATH_DASHBOARD.user.new,
+            roleId: 1,
           },
         ],
       },

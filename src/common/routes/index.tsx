@@ -1,7 +1,6 @@
-import {ElementType, lazy, Suspense} from 'react';
-import {Navigate, useLocation, useRoutes} from 'react-router-dom';
+import { ElementType, lazy, Suspense } from 'react';
+import { Navigate, useRoutes } from 'react-router-dom';
 // hooks
-import useAuth from '../hooks/useAuth';
 // layouts
 import DashboardLayout from '../layouts/dashboard';
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
@@ -11,16 +10,16 @@ import GuestGuard from '../guards/GuestGuard';
 // config
 // components
 import LoadingScreen from '../components/LoadingScreen';
-import {PATH_DASHBOARD} from './paths';
+import { PATH_DASHBOARD } from './paths';
 
 // ----------------------------------------------------------------------
 
 const Loadable = (Component: ElementType) => (props: any) => {
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
 
-  const isDashboard = pathname.includes('/dashboard') && isAuthenticated;
+  const isDashboard = true; //pathname.includes('/dashboard') && isAuthenticated;
 
   return (
     <Suspense fallback={<LoadingScreen isDashboard={isDashboard} />}>
@@ -62,17 +61,6 @@ export default function Router() {
       ),
       children: [
         {
-          path: 'merchant',
-          children: [
-            {
-              element: <Navigate to={PATH_DASHBOARD.merchant.root} replace />,
-              index: true,
-            },
-            { path: 'settings', element: <AccountGeneral /> },
-            { path: 'change-password', element: <AccountChangePassword /> },
-          ],
-        },
-        {
           path: PATH_DASHBOARD.tag.root,
           children: [
             {
@@ -103,6 +91,32 @@ export default function Router() {
           ],
         },
         {
+          path: PATH_DASHBOARD.order_management.root,
+          children: [
+            {
+              path: PATH_DASHBOARD.order_management.list,
+              element: <OrderListContainer />,
+            },
+            {
+              path: PATH_DASHBOARD.order_management.detail,
+              element: <DetailOrderContainer />,
+            },
+          ],
+        },
+        {
+          path: PATH_DASHBOARD.user.root,
+          children: [
+            {
+              path: PATH_DASHBOARD.user.list,
+              element: <UserListContainer />,
+            },
+            {
+              path: PATH_DASHBOARD.user.new,
+              element: <CreateUserContainer />,
+            },
+          ],
+        },
+        {
           path: PATH_DASHBOARD.category.root,
           children: [
             {
@@ -114,6 +128,10 @@ export default function Router() {
               element: <EditCategoryContainer />,
             },
           ],
+        },
+        {
+          path: '/dashboard',
+          element: <StatisticContainer />,
         },
       ],
     },
@@ -172,10 +190,19 @@ const CreateProductContainer = Loadable(
   lazy(() => import('src/product/create-product/index'))
 );
 
+// Product
+const UserListContainer = Loadable(lazy(() => import('src/users/list-user/index')));
+const CreateUserContainer = Loadable(lazy(() => import('src/users/create-user/index')));
+
 // Category
 const CategoryListContainer = Loadable(
-    lazy(() => import('src/category/list-category/index'))
+  lazy(() => import('src/category/list-category/index'))
 );
-const EditCategoryContainer = Loadable(
-    lazy(() => import('src/category/edit/index'))
-);
+const EditCategoryContainer = Loadable(lazy(() => import('src/category/edit/index')));
+
+// order
+const OrderListContainer = Loadable(lazy(() => import('src/order/list-order')));
+const DetailOrderContainer = Loadable(lazy(() => import('src/order/detail-order')));
+
+// statistic
+const StatisticContainer = Loadable(lazy(() => import('src/statistic')));

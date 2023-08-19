@@ -4,13 +4,11 @@ type AuthLoginProps = {
   isAuthenticated: boolean;
   accessToken: string;
   refreshToken: string;
-
 };
 const AuthLoginState: AuthLoginProps = {
   isAuthenticated: false,
   accessToken: '',
   refreshToken: '',
-
 };
 export const authLoginSlice = createSlice({
   name: 'authLogin',
@@ -31,7 +29,8 @@ export const authLoginSlice = createSlice({
   },
 });
 
-export const { setLogin, setLogout, setAccessToken,setRefreshToken } = authLoginSlice.actions;
+export const { setLogin, setLogout, setAccessToken, setRefreshToken } =
+  authLoginSlice.actions;
 export const loginSelector = (state: RootState) => state.authLogin.isAuthenticated;
 export const logoutSelector = (state: RootState) => state.authLogin.isAuthenticated;
 export const accessTokenSelector = (state: RootState) => state.authLogin.accessToken;

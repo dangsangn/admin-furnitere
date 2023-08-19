@@ -9,8 +9,9 @@ import { IAuth, IResInfo, IResLogin, IResMerchantInfo } from './interface';
 export const getAuth = (params: IAuth): Promise<IResLogin> => {
   return axios.post(API_LOGIN, params);
 };
+
 export const getLogout = () => {
-  return axios.delete('merchant/auth/logout');
+  return axios.post('/user/logout');
 };
 
 export const getMerchantInfo = (): Promise<IResInfo> => {
@@ -26,5 +27,9 @@ export const postGetMerchantInfo = ({
 };
 
 export const getPolicesUser = () => {
-  return axios.get<unknown, IResInfo>(API_MERCHANT_POLICIES);
+  return axios.post<unknown, IResInfo>(API_MERCHANT_POLICIES);
+};
+
+export const getProfileUser = () => {
+  return axios.get('/user/get-profile');
 };

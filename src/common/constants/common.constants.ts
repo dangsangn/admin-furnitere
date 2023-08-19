@@ -38,6 +38,9 @@ export const BREADCUMBS = {
   TAGS: 'Tags',
   EDIT_TAG: 'Chỉnh sửa Tag',
   PRODUCT_NEW_VN: 'Thêm mới sản phẩm',
+  USER_NEW_VN: 'Thêm mới Nhân viên',
+  ORDER: 'Đặt hàng',
+  USER: 'Nhân viên',
 };
 export const FORMAT_DATE_FILTER = 'MM-DD-YYYY HH:mm:ss';
 export const DEFAULT_MAIN_COLOR = '#C5DFF8';

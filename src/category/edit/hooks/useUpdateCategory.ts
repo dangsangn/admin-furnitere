@@ -1,7 +1,7 @@
-import {ICallback} from 'src/tag/common/interface';
-import {useMutation, useQueryClient} from 'react-query';
-import {QUERY_KEYS} from 'src/common/constants/queryKeys.constant';
-import {updateCategory} from 'src/category/services';
+import { ICallback } from 'src/tag/common/interface';
+import { useMutation, useQueryClient } from 'react-query';
+import { QUERY_KEYS } from 'src/common/constants/queryKeys.constant';
+import { updateCategory } from 'src/category/services';
 
 export const useUpdateCategory = (callback: ICallback) => {
   const queryClient = useQueryClient();

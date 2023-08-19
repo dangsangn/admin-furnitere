@@ -1,14 +1,14 @@
 // @mui
-import { List, Box } from '@mui/material';
+import { Box, List } from '@mui/material';
 // hooks
 //
-import { NavSectionProps } from '../type';
-import { ListSubheaderStyle } from './style';
-import NavList from './NavList';
-import useLocales from 'src/common/hooks/useLocales';
 import { useSelector } from 'react-redux';
-import { policiesSelector, rulesSelector } from '../../../../auth/login/login.slice';
+import useLocales from 'src/common/hooks/useLocales';
+import { policiesSelector, roleIdSelector } from '../../../../auth/login/login.slice';
 import Can from '../../../lib/Can';
+import { NavSectionProps } from '../type';
+import NavList from './NavList';
+import { ListSubheaderStyle } from './style';
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ export default function NavSectionVertical({
 }: NavSectionProps) {
   const { translate } = useLocales();
   const policies = useSelector(policiesSelector);
-  const rules = useSelector(rulesSelector);
+  const roleId = useSelector(roleIdSelector);
 
   return (
     <Box {...other}>
@@ -36,15 +36,18 @@ export default function NavSectionVertical({
           </ListSubheaderStyle>
 
           {!policies?.length
-            ? group.items.map((list) => (
-                <NavList
-                  key={list.title + list.path}
-                  data={list}
-                  depth={1}
-                  hasChildren={!!list.children}
-                  isCollapse={isCollapse}
-                />
-              ))
+            ? group.items.map((list) => {
+                return (
+                  <NavList
+                    key={list.title + list.path}
+                    data={list}
+                    depth={1}
+                    hasChildren={!!list.children}
+                    isCollapse={isCollapse}
+                    canClick={roleId === 1 || list.roleId === roleId}
+                  />
+                );
+              })
             : group.items.map((list, index) => (
                 <Can do={list?.action} on={list?.resource} key={index}>
                   <NavList
@@ -53,6 +56,7 @@ export default function NavSectionVertical({
                     depth={1}
                     hasChildren={!!list.children}
                     isCollapse={isCollapse}
+                    canClick={roleId === 1 || list.roleId === roleId}
                   />
                 </Can>
               ))}

@@ -26,23 +26,23 @@ const menuConfig = [
       {
         subheader: 'Authentication',
         items: [
-          { title: 'Login', path: PATH_AUTH.loginUnprotected },
-          { title: 'Register', path: PATH_AUTH.registerUnprotected },
-          { title: 'Reset password', path: PATH_AUTH.resetPassword },
-          { title: 'Verify code', path: PATH_AUTH.verify },
+          { title: 'Login', path: PATH_AUTH.loginUnprotected, roleId: 2 },
+          { title: 'Register', path: PATH_AUTH.registerUnprotected, roleId: 2 },
+          { title: 'Reset password', path: PATH_AUTH.resetPassword, roleId: 2 },
+          { title: 'Verify code', path: PATH_AUTH.verify, roleId: 2 },
         ],
       },
       {
         subheader: 'Error',
         items: [
-          { title: 'Page 403', path: PATH_PAGE.page403 },
-          { title: 'Page 404', path: PATH_PAGE.page404 },
-          { title: 'Page 500', path: PATH_PAGE.page500 },
+          { title: 'Page 403', path: PATH_PAGE.page403, roleId: 2 },
+          { title: 'Page 404', path: PATH_PAGE.page404, roleId: 2 },
+          { title: 'Page 500', path: PATH_PAGE.page500, roleId: 2 },
         ],
       },
       {
         subheader: 'Dashboard',
-        items: [{ title: 'Dashboard', path: PATH_AFTER_LOGIN }],
+        items: [{ title: 'Dashboard', path: PATH_AFTER_LOGIN, roleId: 2 }],
       },
     ],
   },

@@ -8,7 +8,6 @@ import Iconify from '../Iconify';
 import { ColorSchema } from '../../theme/palette';
 // components
 
-
 // ----------------------------------------------------------------------
 
 const IconWrapperStyle = styled('div')(({ theme }) => ({

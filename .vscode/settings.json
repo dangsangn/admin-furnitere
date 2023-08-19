@@ -1,5 +1,8 @@
 {
   "typescript.preferences.importModuleSpecifier": "relative",
   "git.branchProtection": ["develop", "prod", "stage"],
-  "git.branchProtectionPrompt": "alwaysCommitToNewBranch"
+  "git.branchProtectionPrompt": "alwaysCommitToNewBranch",
+  "i18n-ally.localesPaths": [
+    "src/common/locales"
+  ]
 }

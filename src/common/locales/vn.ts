@@ -9,9 +9,9 @@ const vn = {
   },
   CategoryList: {
     Edit: {
-      successBar: "Cập nhật thành công",
-      errorBar: "Cập nhật thất bại"
-    }
+      successBar: 'Cập nhật thành công',
+      errorBar: 'Cập nhật thất bại',
+    },
   },
   navTitle: {
     event: {
@@ -871,9 +871,19 @@ const vn = {
     },
   },
   ListOrder: {
-    titleOrderNavbar: 'Quản lý đơn quà',
+    title: 'Quản lý đơn hàng',
+    list: 'Quản lý đơn hàng',
+    titleOrderNavbar: 'Quản lý đơn hàng',
     listTitleNavbar: 'Quản lý đơn quà vật lý',
     listVoucher: 'Quản lý đơn quà E-Voucher',
+  },
+  ListUser: {
+    title: 'Quản lý nhân viên',
+    list: 'Quản lý nhân viên',
+    titleOrderNavbar: 'Quản lý nhân viên',
+    listTitleNavbar: 'Quản lý đơn quà vật lý',
+    listVoucher: 'Quản lý đơn quà E-Voucher',
+    newUser: 'Thêm nhân viên',
   },
   ConfigPoint: {
     New: {

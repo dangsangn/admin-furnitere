@@ -17,7 +17,12 @@ interface Props extends CardProps {
   }[];
 }
 
-export default function AnalyticsConversionRates({ title, subheader, chartData, ...other }: Props) {
+export default function AnalyticsConversionRates({
+  title,
+  subheader,
+  chartData,
+  ...other
+}: Props) {
   const chartLabels = chartData.map((i) => i.label);
 
   const chartSeries = chartData.map((i) => i.value);

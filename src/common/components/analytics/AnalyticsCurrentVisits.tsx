@@ -79,7 +79,12 @@ export default function AnalyticsCurrentVisits({
       <CardHeader title={title} subheader={subheader} />
 
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="pie" series={chartSeries} options={chartOptions} height={280} />
+        <ReactApexChart
+          type="pie"
+          series={chartSeries}
+          options={chartOptions}
+          height={280}
+        />
       </ChartWrapperStyle>
     </Card>
   );

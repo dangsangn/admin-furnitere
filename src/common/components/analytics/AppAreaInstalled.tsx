@@ -13,10 +13,8 @@ interface Props extends CardProps {
   subheader?: string;
   chartLabels: string[];
   chartData: {
-    
-      name: string;
-      data: number[];
- 
+    name: string;
+    data: number[];
   }[];
 }
 
@@ -41,17 +39,15 @@ export default function AppAreaInstalled({
 
   return (
     <Card {...other}>
-      
-      <CardHeader
-        title={title}
-        subheader={subheader}
-      />
-        <Box sx={{ mt: 3, mx: 3 }} dir="ltr">
-          
-            <ReactApexChart type="line" series={chartData} options={chartOptions} height={364} />
-          
-        </Box>
-
+      <CardHeader title={title} subheader={subheader} />
+      <Box sx={{ mt: 3, mx: 3 }} dir="ltr">
+        <ReactApexChart
+          type="line"
+          series={chartData}
+          options={chartOptions}
+          height={364}
+        />
+      </Box>
     </Card>
   );
 }

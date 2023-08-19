@@ -1,19 +1,19 @@
-import {yupResolver} from '@hookform/resolvers/yup';
-import {Button, Paper, Stack} from '@mui/material';
-import {useForm} from 'react-hook-form';
-import {useTranslation} from 'react-i18next';
-import {FormProvider, RHFTextField} from '../../../common/components/hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Paper, Stack } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { FormProvider, RHFTextField } from '../../../common/components/hook-form';
 import Iconify from '../../../common/components/Iconify';
 import useMessage from '../../../common/hooks/useMessage';
-import {useNavigate, useParams} from 'react-router-dom';
-import {PATH_DASHBOARD} from '../../../common/routes/paths';
-import {ICategory} from 'src/category/common/interface';
-import {UpdateCategorySchema} from 'src/category/edit/schema';
+import { useNavigate, useParams } from 'react-router-dom';
+import { PATH_DASHBOARD } from '../../../common/routes/paths';
+import { ICategory } from 'src/category/common/interface';
+import { UpdateCategorySchema } from 'src/category/edit/schema';
 import useGetCategoryById from 'src/category/edit/hooks/useGetCategoryById';
 import EditIcon from '@mui/icons-material/Edit';
-import {LoadingButton} from '@mui/lab';
-import {useUpdateCategory} from 'src/category/edit/hooks/useUpdateCategory';
-import {useEffect} from 'react';
+import { LoadingButton } from '@mui/lab';
+import { useUpdateCategory } from 'src/category/edit/hooks/useUpdateCategory';
+import { useEffect } from 'react';
 
 const EditForm = () => {
   const { t } = useTranslation();

@@ -1,30 +1,52 @@
-import React, { useCallback } from 'react';
-import { useForm } from 'react-hook-form';
-import { IFormNewProduct, IPostProduct } from '../interface';
-import { FormProvider, RHFTextField } from '../../../common/components/hook-form';
-import { Stack, Paper, Button } from '@mui/material';
-import DetailProductForm from './DetailProductForm';
-import Iconify from '../../../common/components/Iconify';
-import { useTranslation } from 'react-i18next';
-import RHFSelectSingleValue from './RHFSelectPagination';
-import { LoadingButton } from '@mui/lab';
-import { PATH_DASHBOARD } from '../../../common/routes/paths';
-import { useNavigate } from 'react-router-dom';
-import { NewProductSchema } from '../schema';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { LoadingButton } from '@mui/lab';
+import { Button, Paper, Stack } from '@mui/material';
+import { useCallback, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import Iconify from '../../../common/components/Iconify';
+import { FormProvider, RHFTextField } from '../../../common/components/hook-form';
+import useShowSnackbar from '../../../common/hooks/useMessage';
+import { useUploadImage } from '../../../common/hooks/useUploadImage';
+import { PATH_DASHBOARD } from '../../../common/routes/paths';
+import axiosInstance from '../../../common/utils/axios';
 import { useGetProductCategory } from '../../common/hooks/useGetProductCategory';
 import { useGetSupplier } from '../../common/hooks/useGetSupplier';
 import { useCreateProduct } from '../hooks/useCreateProduct';
-import useShowSnackbar from '../../../common/hooks/useMessage';
-import { dispatch } from '../../../common/redux/store';
-import { useUploadImage } from '../../../common/hooks/useUploadImage';
+import { useGetDetailProduct } from '../hooks/useGetDetailProduct';
+import { IFormNewProduct, IPostProduct } from '../interface';
+import { NewProductSchema } from '../schema';
+import DetailProductForm from './DetailProductForm';
+import RHFSelectSingleValue from './RHFSelectPagination';
+import { useUpdateProduct } from '../hooks/useUpdateProduct';
 
 const ProductNewForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const idProduct = searchParams.get('id');
+
   const { showErrorSnackbar, showSuccessSnackbar } = useShowSnackbar();
+  const { data } = useGetDetailProduct(idProduct);
+
   const methods = useForm<IFormNewProduct>({
     resolver: yupResolver(NewProductSchema),
+    defaultValues: {
+      name: '',
+      description: '',
+      price: 0,
+      imageUrl: '',
+      categoryId: {
+        name: '',
+        id: 0,
+      },
+      supplierId: { name: '', id: 0 },
+      unit: '',
+      qty: 0,
+      isActive: true,
+      photoUrl: '',
+    },
   });
   const {
     handleSubmit,
@@ -32,6 +54,32 @@ const ProductNewForm = () => {
     reset,
     formState: { isSubmitting, errors },
   } = methods;
+
+  useEffect(() => {
+    (async () => {
+      if (idProduct && data) {
+        try {
+          const category = await axiosInstance.get('category/' + data?.categoryId);
+          const supplier = await axiosInstance.get('supplier/' + data?.suplierId);
+          reset({
+            name: data?.name || '',
+            description: data?.description || '',
+            price: data?.price || 0,
+            imageUrl: data?.imageUrl || '',
+            categoryId: {
+              name: category.data?.name,
+              id: category.data?.id,
+            },
+            supplierId: { name: supplier.data?.name, id: supplier.data?.id },
+            unit: data?.unit || '',
+            qty: data?.qty || 0,
+            isActive: data?.isActive || true,
+            photoUrl: data?.imageUrl || '',
+          });
+        } catch (error) {}
+      }
+    })();
+  }, [reset, idProduct, data]);
 
   const { handleUploadImage, setImageUpload } = useUploadImage();
 
@@ -58,12 +106,20 @@ const ProductNewForm = () => {
     },
     onError: () => {
       showErrorSnackbar(`Tạo sản phẩm thất bại, ${error}`);
-      reset();
+    },
+  });
+  const { mutate: mutateUpdate, error: errorUpdate } = useUpdateProduct({
+    onSuccess: () => {
+      showSuccessSnackbar(`Cập nhật sản phẩm thành công`);
+      navigate(PATH_DASHBOARD.product.list);
+    },
+    onError: () => {
+      showErrorSnackbar(`Cập nhật sản phẩm thất bại, ${errorUpdate}`);
     },
   });
 
   const onSubmit = async (dataSubmit: IFormNewProduct) => {
-    const imageUrl = await handleUploadImage();
+    const imageUrl = (await handleUploadImage()) || data?.imageUrl;
     const dataTransfer: IPostProduct = {
       categoryId: dataSubmit?.categoryId?.id,
       description: dataSubmit?.description,
@@ -75,6 +131,10 @@ const ProductNewForm = () => {
       supplierId: dataSubmit?.supplierId?.id,
       unit: dataSubmit?.unit,
     };
+    if (idProduct) {
+      mutateUpdate({ data: dataTransfer, id: idProduct });
+      return;
+    }
     mutate({ ...dataTransfer });
   };
 
@@ -234,7 +294,7 @@ const ProductNewForm = () => {
           type="submit"
           loading={isSubmitting}
         >
-          {t('productMerchant.new.createProduct')}
+          {idProduct ? 'Cập nhật' : t('productMerchant.new.createProduct')}
         </LoadingButton>
         <Button
           color="inherit"

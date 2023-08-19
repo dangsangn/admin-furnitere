@@ -1,4 +1,4 @@
-import {IMetaResponse} from '../../product/common/interface.common';
+import { IMetaResponse } from '../../product/common/interface.common';
 
 export interface ICategory {
   id: number;

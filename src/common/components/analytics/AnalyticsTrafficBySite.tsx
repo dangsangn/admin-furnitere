@@ -1,5 +1,13 @@
 // @mui
-import { Box, Card, Paper, Typography, CardHeader, CardContent, CardProps } from '@mui/material';
+import {
+  Box,
+  Card,
+  Paper,
+  Typography,
+  CardHeader,
+  CardContent,
+  CardProps,
+} from '@mui/material';
 import { fShortenNumber } from '../../utils/formatNumber';
 // utils
 // ----------------------------------------------------------------------
@@ -14,7 +22,12 @@ interface Props extends CardProps {
   }[];
 }
 
-export default function AnalyticsTrafficBySite({ title, subheader, list, ...other }: Props) {
+export default function AnalyticsTrafficBySite({
+  title,
+  subheader,
+  list,
+  ...other
+}: Props) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -28,7 +41,11 @@ export default function AnalyticsTrafficBySite({ title, subheader, list, ...othe
           }}
         >
           {list.map((site) => (
-            <Paper key={site.name} variant="outlined" sx={{ py: 2.5, textAlign: 'center' }}>
+            <Paper
+              key={site.name}
+              variant="outlined"
+              sx={{ py: 2.5, textAlign: 'center' }}
+            >
               <Box sx={{ mb: 0.5 }}>{site.icon}</Box>
 
               <Typography variant="h6">{fShortenNumber(site.value)}</Typography>

@@ -1,14 +1,23 @@
 import useTable from 'src/common/hooks/useTable';
-import {Box, FormControlLabel, Paper, Switch, Table, TableBody, TableContainer, TablePagination,} from '@mui/material';
-import {TableHeadCustom, TableNoData, TableSkeleton} from 'src/common/components/table';
+import {
+  Box,
+  FormControlLabel,
+  Paper,
+  Switch,
+  Table,
+  TableBody,
+  TableContainer,
+  TablePagination,
+} from '@mui/material';
+import { TableHeadCustom, TableNoData, TableSkeleton } from 'src/common/components/table';
 import React from 'react';
 import useGetCategory from 'src/category/list-category/hooks/useGetCategory';
-import {IPageAndLimitParams} from 'src/product/common/interface.common';
-import {ICategory} from 'src/category/common/interface';
+import { IPageAndLimitParams } from 'src/product/common/interface.common';
+import { ICategory } from 'src/category/common/interface';
 import CategoryTableRow from './CategoryTableRow';
-import {HEAD_TABLE_PROPS} from 'src/category/constants';
-import {useNavigate} from 'react-router-dom';
-import {PATH_DASHBOARD} from 'src/common/routes/paths';
+import { HEAD_TABLE_PROPS } from 'src/category/constants';
+import { useNavigate } from 'react-router-dom';
+import { PATH_DASHBOARD } from 'src/common/routes/paths';
 
 const CategoryTable = () => {
   const {

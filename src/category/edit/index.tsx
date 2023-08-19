@@ -1,12 +1,12 @@
-import {Container} from '@mui/material';
+import { Container } from '@mui/material';
 import HeaderBreadcrumbs from 'src/common/components/HeaderBreadcrumbs';
-import {BREADCUMBS} from 'src/common/constants/common.constants';
-import {PATH_DASHBOARD} from 'src/common/routes/paths';
+import { BREADCUMBS } from 'src/common/constants/common.constants';
+import { PATH_DASHBOARD } from 'src/common/routes/paths';
 import Page from 'src/common/components/Page';
 import useSettings from 'src/common/hooks/useSettings';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import EditForm from 'src/category/edit/components/EditForm';
-import vn from "src/common/locales/vn";
+import vn from 'src/common/locales/vn';
 
 const CategoryEditContainer = () => {
   const { themeStretch } = useSettings();

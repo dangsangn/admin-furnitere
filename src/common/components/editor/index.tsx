@@ -93,7 +93,7 @@ export default function Editor({
           ...sx,
         }}
       >
-        <Box sx={{ display: disable ? 'none' : 'flex'}}>
+        <Box sx={{ display: disable ? 'none' : 'flex' }}>
           <EditorToolbar id={id} isSimple={simple} />
         </Box>
         <ReactQuill

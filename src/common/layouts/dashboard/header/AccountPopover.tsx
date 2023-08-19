@@ -9,7 +9,12 @@ import { PATH_AUTH } from '../../../routes/paths';
 // components
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { setAccessToken, setLogin, setLogout, setRefreshToken } from 'src/auth/login/auth.slice';
+import {
+  setAccessToken,
+  setLogin,
+  setLogout,
+  setRefreshToken,
+} from 'src/auth/login/auth.slice';
 import { IMerchantProfileProps } from 'src/common/@types/profile';
 import { ACCOUNT_MENU_OPTIONS } from 'src/common/constants/profile.constants';
 import useIsMountedRef from 'src/common/hooks/useIsMountedRef';
@@ -38,7 +43,7 @@ export default function AccountPopover({ user }: IMerchantProfileProps) {
     dispatch(setLogin(false));
     dispatch(setAccessToken(''));
     dispatch(setRefreshToken(''));
-    
+
     dispatch(setMerchantInfo({}));
     navigate(PATH_AUTH.login, { replace: true });
     enqueueSnackbar(t('logout_success'), {

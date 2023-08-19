@@ -1,6 +1,6 @@
 import HeaderBreadcrumbs from '../../../common/components/HeaderBreadcrumbs';
-import {BREADCUMBS} from '../../../common/constants/common.constants';
-import {PATH_DASHBOARD} from '../../../common/routes/paths';
+import { BREADCUMBS } from '../../../common/constants/common.constants';
+import { PATH_DASHBOARD } from '../../../common/routes/paths';
 import vn from 'src/common/locales/vn';
 
 const EditHeader = () => {

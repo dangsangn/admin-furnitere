@@ -11,7 +11,6 @@ import {
 import { fDateTime } from '../../utils/formatTime';
 // utils
 
-
 // ----------------------------------------------------------------------
 
 type ItemProps = {
@@ -27,7 +26,12 @@ interface Props extends CardProps {
   list: ItemProps[];
 }
 
-export default function AnalyticsOrderTimeline({ title, subheader, list, ...other }: Props) {
+export default function AnalyticsOrderTimeline({
+  title,
+  subheader,
+  list,
+  ...other
+}: Props) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />

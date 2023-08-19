@@ -1,22 +1,21 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 // @mui
-import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 // hooks
-import useSettings from '../../hooks/useSettings';
-import useResponsive from '../../hooks/useResponsive';
 import useCollapseDrawer from '../../hooks/useCollapseDrawer';
+import useResponsive from '../../hooks/useResponsive';
+import useSettings from '../../hooks/useSettings';
 // config
 import { HEADER, NAVBAR } from '../../../config';
 //
-import DashboardHeader from './header';
-import NavbarVertical from './navbar/NavbarVertical';
-import NavbarHorizontal from './navbar/NavbarHorizontal';
-import { policiesSelector, setPolicies } from '../../../auth/login/login.slice';
+import { useDispatch } from 'react-redux';
 import { useGetGroupPolicesUser } from '../../../auth/login/hook/useGetGroupPoliciesUser';
-import { useDispatch, useSelector } from 'react-redux';
 import useDeepEffect from '../../hooks/useDeepEffect';
+import DashboardHeader from './header';
+import NavbarHorizontal from './navbar/NavbarHorizontal';
+import NavbarVertical from './navbar/NavbarVertical';
 
 // ----------------------------------------------------------------------
 
@@ -48,16 +47,8 @@ const MainStyle = styled('main', {
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout() {
-  const dispatch = useDispatch();
-
-  const { useDeepCompareEffect } = useDeepEffect();
-
   const { collapseClick, isCollapse } = useCollapseDrawer();
   const { data: policies } = useGetGroupPolicesUser();
-  useDeepCompareEffect(() => {
-    const groupPolicies = policies?.user?.groupPolicies || [];
-    dispatch(setPolicies(groupPolicies));
-  }, [policies]);
 
   const { themeLayout } = useSettings();
 

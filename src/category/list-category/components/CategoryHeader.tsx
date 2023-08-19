@@ -1,9 +1,9 @@
 import vn from 'src/common/locales/vn';
-import {BREADCUMBS} from 'src/common/constants/common.constants';
-import {PATH_DASHBOARD} from 'src/common/routes/paths';
-import {Button} from '@mui/material';
+import { BREADCUMBS } from 'src/common/constants/common.constants';
+import { PATH_DASHBOARD } from 'src/common/routes/paths';
+import { Button } from '@mui/material';
 import Iconify from 'src/common/components/Iconify';
-import {Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import HeaderBreadcrumbs from 'src/common/components/HeaderBreadcrumbs';
 
 const CategoryHeader = () => {
@@ -12,7 +12,7 @@ const CategoryHeader = () => {
       heading={vn.category.list}
       links={[
         { name: BREADCUMBS.DASHBOARD, href: PATH_DASHBOARD.root },
-        { name:vn.category.list, href: PATH_DASHBOARD.category.list },
+        { name: vn.category.list, href: PATH_DASHBOARD.category.list },
         { name: vn.category.list },
       ]}
       action={
