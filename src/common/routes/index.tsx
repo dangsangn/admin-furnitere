@@ -114,6 +114,10 @@ export default function Router() {
               path: PATH_DASHBOARD.user.new,
               element: <CreateUserContainer />,
             },
+            {
+              path: PATH_DASHBOARD.user.changePassword,
+              element: <ChangePasswordContainer />,
+            },
           ],
         },
         {
@@ -168,9 +172,6 @@ const Register = Loadable(lazy(() => import('../../auth/register/Register')));
 const AccountGeneral = Loadable(
   lazy(() => import('../../profile/account-general/AccountGeneral'))
 );
-const AccountChangePassword = Loadable(
-  lazy(() => import('../../profile/account-change-password/AccountChangePassword'))
-);
 
 const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 const Page403 = Loadable(lazy(() => import('../pages/Page403')));
@@ -193,7 +194,9 @@ const CreateProductContainer = Loadable(
 // Product
 const UserListContainer = Loadable(lazy(() => import('src/users/list-user/index')));
 const CreateUserContainer = Loadable(lazy(() => import('src/users/create-user/index')));
-
+const ChangePasswordContainer = Loadable(
+  lazy(() => import('../../profile/account-change-password/AccountChangePassword'))
+);
 // Category
 const CategoryListContainer = Loadable(
   lazy(() => import('src/category/list-category/index'))

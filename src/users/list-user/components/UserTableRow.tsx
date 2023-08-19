@@ -38,7 +38,7 @@ IPropTableRow) => {
     deleteUser(row.id, {
       onSuccess: () => {
         queryClient.invalidateQueries([QUERY_KEYS.LIST_USER]);
-        enqueueSnackbar('Xóa Nhân viên thành công', {
+        enqueueSnackbar('ẨN Nhân viên thành công', {
           variant: 'success',
           autoHideDuration: 1000,
         });

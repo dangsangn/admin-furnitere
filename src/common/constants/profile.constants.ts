@@ -7,8 +7,8 @@ export const ACCOUNT_MENU_OPTIONS = [
     linkTo: '/',
   },
   {
-    label: i18n.t('profile'),
-    linkTo: PATH_DASHBOARD.merchant.settings,
+    label: 'Đổi mật khẩu',
+    linkTo: PATH_DASHBOARD.user.changePassword,
   },
   {
     label: i18n.t('settings'),

@@ -74,6 +74,7 @@ export const PATH_DASHBOARD = {
     new: path(ROOT_DASHBOARD, '/user/new'),
     detail: path(ROOT_DASHBOARD, '/user/detail/:id'),
     edit: path(ROOT_DASHBOARD, '/user/edit/:id'),
+    changePassword: path(ROOT_DASHBOARD, '/user/change-password'),
   },
   product_attribute: {
     root: path(ROOT_DASHBOARD, '/product-attribute'),

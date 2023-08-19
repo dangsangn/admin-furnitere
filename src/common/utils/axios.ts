@@ -19,7 +19,7 @@ axiosInstance.interceptors.response.use(
   (response) => response.data,
   (error) => {
     const { response } = error;
-    // store.dispatch(setLogin(false));
+
     // const refreshToken = store.getState()?.authLogin.refreshToken;
     if (response?.status === 401) {
       // axiosInstance2.post<any, { accessToken: string }>('/merchant/auth/refresh-token', {
@@ -33,7 +33,9 @@ axiosInstance.interceptors.response.use(
       //     window.location.href = PATH_AUTH.login;
       //   })
     }
-    console.log('response:', response);
+    if (response?.data?.message === 'Invalid token') {
+      store.dispatch(setLogin(false));
+    }
     return Promise.reject(error);
   }
 );

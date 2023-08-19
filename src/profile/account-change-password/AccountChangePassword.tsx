@@ -6,10 +6,10 @@ export default function AccountChangePassword() {
   return (
     <>
       <HeaderBreadcrumbs
-        heading="Account"
+        heading="Đổi tài khoản"
         links={[
           { name: 'Dashboard', href: PATH_DASHBOARD.root },
-          { name: 'Merchant', href: PATH_DASHBOARD.merchant.root },
+          { name: 'Tài khoản', href: PATH_DASHBOARD.root },
           { name: i18n.t('change_password') },
         ]}
       />

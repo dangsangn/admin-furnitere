@@ -5,8 +5,8 @@ export interface FormValuesProps {
 }
 
 export interface IDataUpdatePassword {
-  email: string;
-  new_password: string;
+  oldPassword: string;
+  newPassword: string;
 }
 
 export interface ICallback {

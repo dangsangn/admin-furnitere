@@ -50,14 +50,14 @@ export default function AccountChangePasswordForm() {
   const { mutate, isLoading } = useUpdatePassword({
     onSuccess: () => {
       showSuccessSnackbar(t('successUpdatePass'));
-      navigation(PATH_DASHBOARD.merchant.settings);
+      navigation(PATH_DASHBOARD.root);
     },
     onError: () => showErrorSnackbar(t('failUpdatePass')),
   });
   const onSubmit = async (data: FormValuesProps) => {
     const dataUpdate: IDataUpdatePassword = {
-      email: 'nv1@gmail.com',
-      new_password: data.confirmNewPassword,
+      oldPassword: data.oldPassword,
+      newPassword: data.confirmNewPassword,
     };
     mutate({ data: dataUpdate });
   };
