@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { IconButton, InputAdornment, Stack } from '@mui/material';
+import { Box, IconButton, InputAdornment, Stack } from '@mui/material';
 // components
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
@@ -22,6 +22,7 @@ import { useAuthlogin } from '../hook/useLogin';
 import { IFormLoginValuesProps } from '../interface/interface';
 import { setEmail, setShowPassword, showPasswordSelector } from '../login.slice';
 import { LoginSchema } from '../schema/login.schema';
+import { Link } from 'react-router-dom';
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
@@ -100,6 +101,9 @@ export default function LoginForm() {
       >
         {t('auth.login.btnLogin')}
       </LoadingButton>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+        <Link to="/auth/forgot-password">Bạn quên mật khẩu?</Link>
+      </Box>
     </FormProvider>
   );
 }

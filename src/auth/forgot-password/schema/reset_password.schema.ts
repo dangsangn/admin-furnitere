@@ -3,4 +3,5 @@ export const ResetPasswordSchema = Yup.object().shape({
   email: Yup.string()
     .email('Email must be a valid email address')
     .required('Email is required'),
+  code: Yup.string().required('Code is required'),
 });

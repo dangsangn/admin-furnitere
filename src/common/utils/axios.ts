@@ -1,16 +1,18 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { toQueryString } from 'src/common/constants/common.utils';
-import { setAccessToken, setLogin } from '../../auth/login/auth.slice';
-import { setIsExpired } from '../../auth/login/login.slice';
+import { setLogin } from '../../auth/login/auth.slice';
 // config
 import { HOST_API } from '../../config';
 import { store } from '../redux/store';
-import { PATH_AUTH } from '../routes/paths';
 
 // ----------------------------------------------------------------------
 
 const axiosInstance = axios.create({
+  baseURL: HOST_API,
+  paramsSerializer: (param) => toQueryString(param),
+});
+
+export const axiosInstance2 = axios.create({
   baseURL: HOST_API,
   paramsSerializer: (param) => toQueryString(param),
 });

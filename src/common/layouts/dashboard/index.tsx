@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 // @mui
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -14,6 +14,8 @@ import { useGetGroupPolicesUser } from '../../../auth/login/hook/useGetGroupPoli
 import DashboardHeader from './header';
 import NavbarHorizontal from './navbar/NavbarHorizontal';
 import NavbarVertical from './navbar/NavbarVertical';
+import { useSelector } from 'react-redux';
+import { loginSelector } from '../../../auth/login/auth.slice';
 
 // ----------------------------------------------------------------------
 
@@ -55,6 +57,20 @@ export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
 
   const verticalLayout = themeLayout === 'vertical';
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(loginSelector);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/auth/login');
+      return;
+    }
+    if (pathname === '/') {
+      navigate('/dashboard');
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
   if (verticalLayout) {
     return (
