@@ -27,7 +27,7 @@ export const postGetMerchantInfo = ({
 };
 
 export const getPolicesUser = () => {
-  return axios.post<unknown, IResInfo>(API_MERCHANT_POLICIES);
+  return axios.get<unknown, IResInfo>(API_MERCHANT_POLICIES);
 };
 
 export const getProfileUser = () => {

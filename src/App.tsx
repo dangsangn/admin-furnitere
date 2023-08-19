@@ -18,11 +18,28 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'src/common/styles/global.css';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { loginSelector } from './auth/login/auth.slice';
+import useShowSnackbar from './common/hooks/useMessage';
 // ----------------------------------------------------------------------
 // Rebuild cloud run with env
 export default function App() {
   const permissionAbility = useSelector(policiesSelector);
+  const isAuthenticated = useSelector(loginSelector);
   const ability = buildAbilityFor(permissionAbility);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      // navigate('/auth/login');
+      // return;
+    }
+    if (pathname === '/') {
+      navigate('/dashboard');
+    }
+  }, [pathname, navigate, isAuthenticated]);
 
   const queryClient = new QueryClient({
     defaultOptions: {

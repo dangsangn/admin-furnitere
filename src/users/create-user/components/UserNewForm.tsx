@@ -25,7 +25,6 @@ const ProductNewForm = () => {
 
   const { showErrorSnackbar, showSuccessSnackbar } = useShowSnackbar();
   const { data } = useGetDetailUser(idUser);
-  console.log('data:', data);
 
   const methods = useForm<IFormNewUser>({
     resolver: yupResolver(NewUserSchema),
@@ -100,7 +99,7 @@ const ProductNewForm = () => {
     const formData = {
       ...dataSubmit,
       roleId: dataSubmit.roleId.id,
-      isActive: dataSubmit.isActive.id === 1 ? false : true,
+      isActive: dataSubmit.isActive?.id === 1 ? false : true,
     };
     if (idUser) {
       const { password, ...updateData } = formData;
@@ -138,7 +137,7 @@ const ProductNewForm = () => {
       <Stack direction="row" spacing={3}>
         <Stack direction="column" spacing={3} width={'50%'}>
           <RHFTextField name="name" label={'Tên nhân viên'} />
-          <RHFTextField name="email" label={'Email'} />
+          <RHFTextField name="email" label={'Email'} disabled={!!idUser} />
           {!idUser && <RHFTextField type="password" name="password" label={'Mật khẩu'} />}
           {idUser && (
             <RHFSelectSingleValue

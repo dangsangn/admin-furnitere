@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toQueryString } from 'src/common/constants/common.utils';
-import { setAccessToken } from '../../auth/login/auth.slice';
+import { setAccessToken, setLogin } from '../../auth/login/auth.slice';
 import { setIsExpired } from '../../auth/login/login.slice';
 // config
 import { HOST_API } from '../../config';
@@ -14,13 +14,12 @@ const axiosInstance = axios.create({
   baseURL: HOST_API,
   paramsSerializer: (param) => toQueryString(param),
 });
-const axiosInstance2 = axios.create({
-  baseURL: HOST_API,
-});
+
 axiosInstance.interceptors.response.use(
   (response) => response.data,
   (error) => {
     const { response } = error;
+    // store.dispatch(setLogin(false));
     // const refreshToken = store.getState()?.authLogin.refreshToken;
     if (response?.status === 401) {
       // axiosInstance2.post<any, { accessToken: string }>('/merchant/auth/refresh-token', {
@@ -34,6 +33,7 @@ axiosInstance.interceptors.response.use(
       //     window.location.href = PATH_AUTH.login;
       //   })
     }
+    console.log('response:', response);
     return Promise.reject(error);
   }
 );
