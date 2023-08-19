@@ -1,40 +1,28 @@
 import { useSnackbar } from 'notistack';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Typography, Button } from '@mui/material';
+import { Button, Card, Grid, Stack } from '@mui/material';
 // hooks
 // utils
-import { fData } from 'src/common/utils/formatNumber';
 // components
-import {
-  FormProvider,
-  RHFTextField,
-  RHFUploadAvatar,
-} from 'src/common/components/hook-form';
-import { defaultValues } from '../constants';
-import { IFormMerchantProfile } from 'src/common/@types/profile';
-import { UpdateMerchantSchema } from '../schemas';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'src/common/redux/store';
-import {
-  merchantInfoSelector,
-  setMerchantInfo,
-} from 'src/profile/common/reducers/merchant-profile.slice';
-import { formatDate } from 'src/common/constants/common.utils';
-import { usePresignImg } from 'src/common/hooks/usePresignImg';
-import { useMutateEditProfile } from '../hooks/useMutateEditProfile';
-import {
-  IEditMerchantForm,
-  ImageInfo,
-} from 'src/profile/common/interfaces/merchant-profile.interface';
-import { useGetMerchantInfo } from 'src/auth/login/hook/useGetMerchantInfo';
-import useDeepEffect from 'src/common/hooks/useDeepEffect';
 import { useNavigate } from 'react-router-dom';
+import { useGetMerchantInfo } from 'src/auth/login/hook/useGetMerchantInfo';
+import { IFormMerchantProfile } from 'src/common/@types/profile';
+import { FormProvider, RHFTextField } from 'src/common/components/hook-form';
+import useDeepEffect from 'src/common/hooks/useDeepEffect';
+import { usePresignImg } from 'src/common/hooks/usePresignImg';
+import { useDispatch, useSelector } from 'src/common/redux/store';
 import { PATH_DASHBOARD } from 'src/common/routes/paths';
+import { setMerchantInfo } from 'src/profile/common/reducers/merchant-profile.slice';
+import { profileSelector } from '../../../auth/login/login.slice';
+import { defaultValues } from '../constants';
+import { useMutateEditProfile } from '../hooks/useMutateEditProfile';
+import { UpdateMerchantSchema } from '../schemas';
 // ----------------------------------------------------------------------
 
 export default function AccountGeneralForm() {
@@ -49,7 +37,7 @@ export default function AccountGeneralForm() {
     defaultValues,
   });
 
-  const merchantInfo = useSelector(merchantInfoSelector);
+  const profile = useSelector(profileSelector);
 
   const {
     reset,
@@ -60,18 +48,17 @@ export default function AccountGeneralForm() {
   } = methods;
 
   useEffect(() => {
-    if (merchantInfo) {
+    if (profile) {
       reset({
-        ...merchantInfo,
-        createdAt: formatDate(merchantInfo.createdAt as string),
-        photoURL: merchantInfo?.avatar?.url,
+        ...profile,
       });
     }
-  }, [merchantInfo]);
+  }, [profile, reset]);
 
   const { mutate, isSuccess, isLoading } = useMutateEditProfile({
     onSuccess: () => {
       enqueueSnackbar(t('update_success'));
+      navigate(PATH_DASHBOARD.root);
     },
     onError: () => {
       enqueueSnackbar(t('update_fail'));
@@ -86,120 +73,30 @@ export default function AccountGeneralForm() {
     }
   }, [data]);
 
-  const getImageInfo = async (file: File): Promise<ImageInfo> => {
-    const imgInfo = await handleUpload(file);
-    return imgInfo;
-  };
   const onSubmit = async (data: IFormMerchantProfile) => {
-    if (typeof data.photoURL !== 'string') {
-      const image = await getImageInfo(data?.photoURL as File);
-      const dataEdit: IEditMerchantForm = {
-        name: data.name,
-        address: data.address,
-        phoneNumber: data.phoneNumber,
-        avatarId: image?.id,
-      };
-      mutate(dataEdit);
-      return;
-    }
-    const dataEdit: IEditMerchantForm = {
+    const dataEdit: IFormMerchantProfile = {
       name: data.name,
       address: data.address,
-      phoneNumber: data.phoneNumber,
-      avatarId: merchantInfo.avatar?.id as number,
+      phone: data.phone,
     };
     mutate(dataEdit);
   };
 
-  const handleDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      const file = acceptedFiles[0];
-      console.log(file);
-      if (file) {
-        setValue(
-          'photoURL',
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        );
-      }
-    },
-    [setValue]
-  );
-
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ py: 10, px: 3, textAlign: 'center' }}>
-            <RHFUploadAvatar
-              name="photoURL"
-              maxSize={3145728}
-              onDrop={handleDrop}
-              helperText={
-                <Typography
-                  variant="caption"
-                  sx={{
-                    mt: 2,
-                    mx: 'auto',
-                    display: 'block',
-                    textAlign: 'center',
-                    color: 'text.secondary',
-                  }}
-                >
-                  {t('allowed')} *.jpeg, *.jpg, *.png, *.gif
-                  <br /> {t('max_size_of')} {fData(3145728)}
-                </Typography>
-              }
-            />
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={2}>
-              <RHFTextField disabled name="email" label="Email" />
-              <Stack direction={'row'} spacing={1.5}>
-                <RHFTextField
-                  disabled
-                  name="id"
-                  label="ID"
-                  InputLabelProps={{ shrink: true }}
-                />
-                <RHFTextField disabled name="createdAt" label={t('registration_date')} />
-              </Stack>
-              <Stack direction="row" spacing={1.5}>
-                <RHFTextField
-                  name="name"
-                  label={t('name')}
-                  InputLabelProps={{ shrink: true }}
-                />
+              <RHFTextField name="name" label="Tên" />
+              <RHFTextField name="phone" label="Điện thoại" />
+              <RHFTextField name="address" label="Địa chỉ" />
 
-                <RHFTextField
-                  name="phoneNumber"
-                  label={t('phone_number')}
-                  InputLabelProps={{ shrink: true }}
-                />
-              </Stack>
-              <Stack direction="row" spacing={1.5}>
-                <RHFTextField disabled name="status" label={t('status')} />
-                <RHFTextField disabled name="rank" label={t('rank')} />
-              </Stack>
-            </Stack>
-
-            <Stack spacing={3} sx={{ mt: 3 }}>
-              <RHFTextField
-                name="address"
-                multiline
-                rows={2}
-                label={t('address')}
-                InputLabelProps={{ shrink: true }}
-              />
               <Stack direction={'row'} justifyContent={'space-between'}>
                 <Button
                   variant="contained"
                   color="inherit"
-                  onClick={() => navigate(PATH_DASHBOARD.merchant.change_password)}
+                  onClick={() => navigate(PATH_DASHBOARD.user.changePassword)}
                 >
                   {t('change_password')}
                 </Button>

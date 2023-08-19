@@ -10,9 +10,7 @@ import useSettings from '../../hooks/useSettings';
 // config
 import { HEADER, NAVBAR } from '../../../config';
 //
-import { useDispatch } from 'react-redux';
 import { useGetGroupPolicesUser } from '../../../auth/login/hook/useGetGroupPoliciesUser';
-import useDeepEffect from '../../hooks/useDeepEffect';
 import DashboardHeader from './header';
 import NavbarHorizontal from './navbar/NavbarHorizontal';
 import NavbarVertical from './navbar/NavbarVertical';

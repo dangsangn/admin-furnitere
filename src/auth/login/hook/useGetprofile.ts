@@ -9,8 +9,6 @@ export function useGetProfile(isLoggedin: boolean) {
   return {
     ...useQuery([QUERY_KEYS.GET_PROFILE_USER], getProfileUser, {
       enabled: isLoggedin,
-      staleTime: 5000,
-      cacheTime: 0, // cacheTime bằng 0 để đảm bảo kết quả mới nhất sẽ được tải lại từ máy chủ
       onSuccess: (data) => {
         dispatch(setProfile(data?.data));
       },

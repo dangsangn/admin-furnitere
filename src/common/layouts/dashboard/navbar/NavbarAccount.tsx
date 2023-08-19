@@ -40,7 +40,7 @@ export default function NavbarAccount({ isCollapse }: Props) {
       underline="none"
       color="inherit"
       component={RouterLink}
-      to={PATH_DASHBOARD.merchant.settings}
+      to={PATH_DASHBOARD.user.editProfile}
     >
       <RootStyle
         sx={{

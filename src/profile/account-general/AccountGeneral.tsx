@@ -12,8 +12,8 @@ export default function AccountGeneral() {
           heading={i18n.t('account')}
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Merchant', href: PATH_DASHBOARD.merchant.root },
-            { name: i18n.t('account_settings') },
+            { name: 'Cập nhật thông tin', href: PATH_DASHBOARD.root },
+            { name: 'Cập nhật thông tin' },
           ]}
         />
         <AccountGeneralForm />

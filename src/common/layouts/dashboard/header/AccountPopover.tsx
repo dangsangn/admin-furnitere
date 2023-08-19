@@ -9,22 +9,16 @@ import { PATH_AUTH } from '../../../routes/paths';
 // components
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import {
-  setAccessToken,
-  setLogin,
-  setLogout,
-  setRefreshToken,
-} from 'src/auth/login/auth.slice';
-import { IMerchantProfileProps } from 'src/common/@types/profile';
+import { setAccessToken, setLogin, setRefreshToken } from 'src/auth/login/auth.slice';
 import { ACCOUNT_MENU_OPTIONS } from 'src/common/constants/profile.constants';
 import useIsMountedRef from 'src/common/hooks/useIsMountedRef';
-import { IconButtonAnimate } from '../../../components/animate';
+import { setMerchantInfo } from 'src/profile/common/reducers/merchant-profile.slice';
 import MenuPopover from '../../../components/MenuPopover';
 import MyAvatar from '../../../components/MyAvatar';
-import { setMerchantInfo } from 'src/profile/common/reducers/merchant-profile.slice';
+import { IconButtonAnimate } from '../../../components/animate';
 // ----------------------------------------------------------------------
 
-export default function AccountPopover({ user }: IMerchantProfileProps) {
+export default function AccountPopover({ user }: any) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();

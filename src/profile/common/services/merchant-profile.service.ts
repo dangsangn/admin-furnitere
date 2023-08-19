@@ -1,6 +1,5 @@
-import { API_MERCHANT_PROFILE } from 'src/common/constants/apis';
 import axiosInstance from 'src/common/utils/axios';
-import { IEditMerchantForm } from '../interfaces/merchant-profile.interface';
+import { IFormMerchantProfile } from '../../../common/@types/profile';
 
-export const editMerchantProfile = (data: IEditMerchantForm) =>
-  axiosInstance.put(API_MERCHANT_PROFILE, data);
+export const editMerchantProfile = (data: IFormMerchantProfile) =>
+  axiosInstance.put('/user/update-profile', data);

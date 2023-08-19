@@ -11,7 +11,7 @@ export const ACCOUNT_MENU_OPTIONS = [
     linkTo: PATH_DASHBOARD.user.changePassword,
   },
   {
-    label: i18n.t('settings'),
-    linkTo: PATH_DASHBOARD.general.app,
+    label: 'Cập nhật thông tin',
+    linkTo: PATH_DASHBOARD.user.editProfile,
   },
 ];

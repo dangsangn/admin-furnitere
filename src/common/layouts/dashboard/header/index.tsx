@@ -1,6 +1,6 @@
 // @mui
+import { AppBar, Box, Stack, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar, Typography } from '@mui/material';
 // hooks
 import useOffSetTop from '../../../hooks/useOffSetTop';
 import useResponsive from '../../../hooks/useResponsive';
@@ -9,17 +9,13 @@ import cssStyles from '../../../utils/cssStyles';
 // config
 import { HEADER, NAVBAR } from '../../../../config';
 // components
-import Logo from '../../../components/Logo';
 import Iconify from '../../../components/Iconify';
+import Logo from '../../../components/Logo';
 import { IconButtonAnimate } from '../../../components/animate';
 //
-import LanguagePopover from './LanguagePopover';
-import AccountPopover from './AccountPopover';
 import { useSelector } from 'react-redux';
-import { emailSelector } from 'src/auth/login/login.slice';
-import { store } from 'src/common/redux/store';
-import { merchantInfoSelector } from 'src/profile/common/reducers/merchant-profile.slice';
-import { IFormMerchantProfile } from 'src/common/@types/profile';
+import { profileSelector } from 'src/auth/login/login.slice';
+import AccountPopover from './AccountPopover';
 
 // ----------------------------------------------------------------------
 
@@ -71,7 +67,7 @@ export default function DashboardHeader({
   verticalLayout = false,
 }: Props) {
   const isOffset = useOffSetTop(HEADER.DASHBOARD_DESKTOP_HEIGHT) && !verticalLayout;
-  const user = useSelector(merchantInfoSelector) as IFormMerchantProfile;
+  const user = useSelector(profileSelector); 
 
   const isDesktop = useResponsive('up', 'lg');
 
